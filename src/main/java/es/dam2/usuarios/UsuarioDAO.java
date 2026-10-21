@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// Clase que gestiona el acceso a la base de datos para la entidad Usuario.
 public class UsuarioDAO {
     public boolean validarCredenciales(String username, String password) throws SQLException {
         String sql = "SELECT 1 FROM usuarios WHERE username = ? AND password = ? LIMIT 1";
@@ -17,6 +18,7 @@ public class UsuarioDAO {
         }
     }
 
+    // Lista todos los usuarios de la base de datos.
     public List<Usuario> listar() throws SQLException {
         String sql = "SELECT id, username, password, fecha_creacion FROM usuarios ORDER BY id";
         List<Usuario> usuarios = new ArrayList<>();
@@ -35,6 +37,7 @@ public class UsuarioDAO {
         return usuarios;
     }
 
+    // Actualiza un usuario existente en la base de datos.
     public void actualizar(int id, String username, String password) throws SQLException {
         String sql = "UPDATE usuarios SET username = ?, password = ? WHERE id = ?";
         try (Connection con = Database.getConnection();

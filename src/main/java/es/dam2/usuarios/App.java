@@ -5,6 +5,7 @@ import javax.swing.UIManager;
 
 public class App {
     public static void main(String[] args) {
+        // Configuración de la apariencia del sistema operativo
         SwingUtilities.invokeLater(() -> {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

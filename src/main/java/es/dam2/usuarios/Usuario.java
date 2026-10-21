@@ -2,12 +2,14 @@ package es.dam2.usuarios;
 
 import java.sql.Timestamp;
 
+// Clase que representa un usuario en la aplicación de gestión de usuarios.
 public class Usuario {
     private final int id;
     private String username;
     private String password;
     private final Timestamp fechaCreacion;
 
+    // Constructor de la clase Usuario
     public Usuario(int id, String username, String password, Timestamp fechaCreacion) {
         this.id = id;
         this.username = username;

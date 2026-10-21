@@ -6,16 +6,21 @@ import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
 
+// Clase que representa la ventana principal de la aplicación de gestión de usuarios.
 public class UsuariosFrame extends JFrame {
+    // DAO para acceder a la base de datos y gestionar los usuarios.
     private final UsuarioDAO dao = new UsuarioDAO();
+    // Modelo de tabla para mostrar los usuarios en la interfaz gráfica.    
     private final DefaultTableModel modelo = new DefaultTableModel(
             new Object[]{"ID", "Usuario", "Fecha de creación", "Password"}, 0) {
         @Override public boolean isCellEditable(int row, int column) {
             return column == 1 || column == 3;
         }
     };
+    // Tabla que muestra los usuarios en la interfaz gráfica.   
     private final JTable tabla = new JTable(modelo);
 
+    // Constructor de la ventana principal de la aplicación.
     public UsuariosFrame() {
         setTitle("Gestión de usuarios (pool de conexiones)");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,6 +56,7 @@ public class UsuariosFrame extends JFrame {
         cargarUsuarios();
     }
 
+    // Carga los usuarios desde la base de datos y los muestra en la tabla.
     private void cargarUsuarios() {
         try {
             List<Usuario> usuarios = dao.listar();
@@ -70,6 +76,7 @@ public class UsuariosFrame extends JFrame {
         }
     }
 
+    // Guarda los cambios realizados en la tabla de usuarios en la base de datos.
     private void guardarCambios() {
         if (tabla.isEditing()) {
             tabla.getCellEditor().stopCellEditing();

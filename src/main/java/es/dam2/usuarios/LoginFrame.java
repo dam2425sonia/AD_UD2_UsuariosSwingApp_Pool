@@ -4,11 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 
+/**
+ * Ventana de login para la aplicación de gestión de usuarios.
+ * Permite al usuario introducir su nombre de usuario y contraseña.
+ * Valida las credenciales mediante UsuarioDAO y, si son correctas,
+ * abre la ventana principal UsuariosFrame.
+ */ 
 public class LoginFrame extends JFrame {
     private final JTextField txtUsuario = new JTextField(18);
     private final JPasswordField txtPassword = new JPasswordField(18);
     private final UsuarioDAO dao = new UsuarioDAO();
 
+    // Constructor de la ventana de login
     public LoginFrame() {
         setTitle("Acceso - Gestión de usuarios (pool)");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,6 +49,7 @@ public class LoginFrame extends JFrame {
         add(inferior, BorderLayout.SOUTH);
     }
 
+    // Inicia el proceso de login al pulsar el botón "Iniciar sesión".
     private void iniciarSesion() {
         String usuario = txtUsuario.getText().trim();
         String password = new String(txtPassword.getPassword());
@@ -53,6 +61,7 @@ public class LoginFrame extends JFrame {
         }
 
         try {
+            // Valida las credenciales mediante UsuarioDAO
             if (dao.validarCredenciales(usuario, password)) {
                 dispose();
                 new UsuariosFrame().setVisible(true);
